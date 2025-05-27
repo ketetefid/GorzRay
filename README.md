@@ -10,6 +10,7 @@ A user-friendly Xray GUI client with a focus on simplicity and enhancing VPN exp
 - Secure user permission handling via Polkit; optional passwordless VPN mode connection
 - Linux desktop integration with tray, startup options and Unix socket connection
 - All-in-one Python code; suitable for portability
+
 ![GorzRay Screenshot](assets/GorzRay-screenshot.png)
 
 ## How to Build
