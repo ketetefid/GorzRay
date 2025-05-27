@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>GorzRay</id>
+  <name>GorzRay</name>
+  <summary>Graphical Xray Client for Linux</summary>
+  <description>
+    <p>GorzRay is a user-friendly graphical interface for running Xray-based VPN and proxy connections.</p>
+  </description>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>AGPL-3.0-or-later</project_license>
+  <url type="homepage">https://github.com/ketetefid/GorzRay</url>
+  <launchable type="desktop-id">GorzRay.desktop</launchable>
+  <provides>
+    <binary>gorzray.py</binary>
+  </provides>
+</component>

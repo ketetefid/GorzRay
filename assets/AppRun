@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# The TMPDIR must be the same as the one set in the main code
+export TMPDIR=/tmp/gorzray
+if [ ! -d $TMPDIR ]; then
+    mkdir -p "$TMPDIR"
+fi
+
+HERE="$(dirname "$(readlink -f "$0")")"
+
+# Change the path to the Python installed
+# The following LD_PRELOAD was necessary due to some error about pixbufloader
+LD_PRELOAD="$HERE/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-svg.so" exec "$HERE/usr/python/bin/python3" "$HERE/usr/bin/gorzray.py" "$@"
+

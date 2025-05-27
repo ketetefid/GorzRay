@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=GorzRay
+Exec=AppRun
+Icon=gorzray-icon
+Type=Application
+Categories=Utility;
+X-AppImage-Version=0.1.0
+
