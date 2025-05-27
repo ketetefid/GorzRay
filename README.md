@@ -1,6 +1,6 @@
 # GorzRay
 
-A user-friendly Xray GUI client with a focus on simplicity and enhancing VPN experience.
+A user-friendly Xray GUI client for Linux with a focus on simplicity and enhancing VPN experience.
 
 ## Features
 - Simple, intuitive GUI with support for Xray configs and json sublinks
