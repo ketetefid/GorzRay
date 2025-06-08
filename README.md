@@ -79,8 +79,8 @@ This project is licensed under the GNU AGPL v3.0. See [LICENSE](LICENSE) for det
 
 ## Attribution
 
-This project includes binaries/assets from software developed by:
-- [Xray-core](https://github.com/XTLS/Xray-core) (GPL-3.0)
+This project includes unmodified binaries/assets from software developed by:
+- [Xray-core](https://github.com/XTLS/Xray-core) (MPL-2.0)
 - [tun2proxy](https://github.com/tun2proxy/tun2proxy) (MIT License)
 
 See [LICENCES](LICENSES) for full license texts.
