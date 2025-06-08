@@ -13,6 +13,25 @@ A user-friendly Xray GUI client for Linux with a focus on simplicity and enhanci
 
 ![GorzRay Screenshot](assets/GorzRay-screenshot.png)
 
+## Usage
+
+You can run the program normally or use command-line options to start it in a specific mode at launch:
+
+```bash
+optional arguments:
+  -h, --help        show this help message and exit
+  --minimized       Start the app minimized (only tray icon)
+  --connect-proxy   Connect to the last entry in Proxy mode automatically with startup
+  --connect-vpn     Connect to the last entry in VPN mode automatically with startup
+  --install-policy  Install a set of policy and rule files for use with Polkit for passwordless authentication in VPN mode
+```
+
+For better desktop integration, you can create custom shortcuts to control the app — such as connecting or disconnecting from VPN or Proxy modes — via the provided UNIX socket. For example, you can use `socat` to send a command through the socket and bind that to a keyboard shortcut:
+
+```bash
+echo 'setvpn' | socat - UNIX-CONNECT:/tmp/gorzray/gorzray.sock && echo 'connect' | socat - UNIX-CONNECT:/tmp/gorzray/gorzray.sock
+```
+
 ## How to Build
 
 The code is portable and you can directly run it by installing `requests`, `psutil`, `PyGObject` and `pystray` modules via `pip` or your distribution's package manager for Python. In that case, some modifications of the source code are required as currently it is set for use in an [AppImage](https://github.com/AppImage/AppImageKit).
