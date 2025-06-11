@@ -955,17 +955,32 @@ class MainWindow(Gtk.Window):
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         
     def update_tray(self):
+        title_text = ""
         gtk_label = self.start_button.get_label()
         # Update the menu first
         self.tray_icon.update_menu()
 
-        # Update the icon
+        # Update the icon and the title/notification text
+        # On both Wayland and X11 the notification works well in my testing.
+        # However, the documentation advises further checks On X11: if self.tray_icon.HAS_NOTIFICATION
         if self.running and current_mode == "proxy" and gtk_label == "Disconnect":
             self.tray_icon.icon = icon_image_proxy
+            if self.tray_icon.HAS_NOTIFICATION:
+                self.tray_icon.notify(f"Proxy: {os.path.basename(selected_file_path)}","Connected")
+            title_text = f"Connected to Proxy: {os.path.basename(selected_file_path)}"
         elif self.running and current_mode == "vpn" and gtk_label == "Disconnect":
             self.tray_icon.icon = icon_image_vpn
+            if self.tray_icon.HAS_NOTIFICATION:
+                self.tray_icon.notify(f"VPN: {os.path.basename(selected_file_path)}","Connected")
+            title_text = f"Connected to VPN: {os.path.basename(selected_file_path)}"
         else:
             self.tray_icon.icon = icon_image
+            if selected_file_path:
+                if self.tray_icon.HAS_NOTIFICATION:
+                    self.tray_icon.notify(f"from: {os.path.basename(selected_file_path)}","Disconnected")
+            title_text = f"GorzRay: ready"
+        # Update the title
+        self.tray_icon.title = title_text
 
 ##############################################################################
 
