@@ -54,8 +54,6 @@ tun2proxy_pid = -999998
 
 # This must be the same as TMPDIR env var set in AppRun[.wrapped]
 TMPDIR = os.environ.get("TMPDIR", "/tmp/gorzray")
-# Xray geo files directory
-os.environ['XRAY_LOCATION_ASSET'] = f"{TMPDIR}/usr/share/xray-geofiles"
 
 early_log_file = os.path.join(TMPDIR,"gorzray_app.log") 
 xray_log_file = os.path.join(TMPDIR,"gorzray_xray.log")
@@ -79,6 +77,9 @@ MAX_RECENT_FILES = 20
 
 # Corresponds to the AppDir env set by the AppImage
 appdir = os.environ.get("APPDIR", os.path.dirname(__file__))
+
+# Xray geo files directory
+os.environ['XRAY_LOCATION_ASSET'] = f"{appdir}/usr/share/xray-geofiles"
 
 # Icons for the tray
 icon_image = Image.open(os.path.join(appdir, "gorzray-icon.png"))
