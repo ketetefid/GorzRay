@@ -677,6 +677,7 @@ class MainWindow(Gtk.Window):
                 GLib.idle_add(button.set_sensitive, True)
                 GLib.idle_add(button.set_label, "Disconnect")
                 self.running = True
+                GLib.idle_add(self.hide)
                 GLib.idle_add(self.update_tray)
             return False
 
