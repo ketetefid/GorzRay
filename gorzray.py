@@ -252,7 +252,7 @@ def resolve_domains(config: dict) -> Tuple[List[str], dict]:
     inbounds = config.get("inbounds", [])
     socks_port = None
     for inbound in inbounds:
-        if inbound.get("protocol") == "socks":
+        if inbound.get("protocol") == "socks" or  inbound.get("protocol") == "mixed":
             socks_port = inbound.get("port")
 
     if not socks_port:
@@ -264,27 +264,49 @@ def resolve_domains(config: dict) -> Tuple[List[str], dict]:
         print("The config doesn't have any outbounds.")
         return None, None
 
+
     for outbound in outbounds:
         settings = outbound.get("settings")
         if not isinstance(settings, dict):
             continue
 
-        # vless/vmess
+        # vmess/vless : the older subscription json formats
         vnext = settings.get("vnext")
         if isinstance(vnext, list):
             for server in vnext:
-                if isinstance(server, dict):
-                    address = server.get("address")
-                    if isinstance(address, str):
-                        if is_ip(address):
-                            ip = address
-                        else:
-                            ip = resolve_to_ip(address)
-                            if not ip:
-                                return None, None
-                        if not is_cloudflare_ip(ip):
-                            ips.add(ip)
-                        server["address"] = ip
+                if not isinstance(server, dict):
+                    continue
+
+                address = server.get("address")
+                if isinstance(address, str):
+                    if is_ip(address):
+                        ip = address
+                    else:
+                        ip = resolve_to_ip(address)
+                        if not ip:
+                            return None, None
+
+                    if not is_cloudflare_ip(ip):
+                        ips.add(ip)
+
+                    server["address"] = ip
+
+            continue
+
+        # vmess/vless : the newer formats that are more flattened with direct address in settings
+        address = settings.get("address")
+        if isinstance(address, str):
+            if is_ip(address):
+                ip = address
+            else:
+                ip = resolve_to_ip(address)
+                if not ip:
+                    return None, None
+
+            if not is_cloudflare_ip(ip):
+                ips.add(ip)
+
+            settings["address"] = ip
 
         # trojan
         servers = settings.get("servers")
